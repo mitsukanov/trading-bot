@@ -1,8 +1,8 @@
 import auction.Auction;
-import auction.Bidder;
 import auction.DefaultAuction;
+import bidders.AbstractBidder;
 import bidders.AverageBidder;
-import bidders.NullBidder;
+import bidders.ZeroBidder;
 import bidders.RandomBidder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,14 +13,14 @@ public class DefaultAuctionTest {
 
     @Test
     public void biddersWithTheSameMinBalanceTest(){
-        Bidder firstBidder = new RandomBidder();
+        AbstractBidder firstBidder = new RandomBidder();
         firstBidder.init(0, 1);
-        Bidder secondBidder = new RandomBidder();
+        AbstractBidder secondBidder = new RandomBidder();
         secondBidder.init(0, 1);
 
         Auction auction = new DefaultAuction(firstBidder, secondBidder, 10);
 
-        List<Bidder> result = auction.start();
+        List<AbstractBidder> result = auction.start();
 
         firstBidder = result.get(0);
         secondBidder = result.get(1);
@@ -31,9 +31,9 @@ public class DefaultAuctionTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void bidderWithNegativeCashTest(){
-        Bidder firstBidder = new RandomBidder();
+        AbstractBidder firstBidder = new RandomBidder();
         firstBidder.init(0, -1);
-        Bidder secondBidder = new RandomBidder();
+        AbstractBidder secondBidder = new RandomBidder();
         secondBidder.init(0, 1);
 
         Auction auction = new DefaultAuction(firstBidder, secondBidder, 10);
@@ -43,9 +43,9 @@ public class DefaultAuctionTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void bidderWithNullCashTest(){
-        Bidder firstBidder = new RandomBidder();
+        AbstractBidder firstBidder = new RandomBidder();
         firstBidder.init(0, 0);
-        Bidder secondBidder = new RandomBidder();
+        AbstractBidder secondBidder = new RandomBidder();
         secondBidder.init(0, 1);
 
         Auction auction = new DefaultAuction(firstBidder, secondBidder, 10);
@@ -54,15 +54,15 @@ public class DefaultAuctionTest {
 
 
     @Test
-    public void nullBiddersDrawTest(){
-        Bidder firstBidder = new NullBidder();
+    public void zeroBiddersDrawTest(){
+        AbstractBidder firstBidder = new ZeroBidder();
         firstBidder.init(0, 100);
-        Bidder secondBidder = new NullBidder();
+        AbstractBidder secondBidder = new ZeroBidder();
         secondBidder.init(0, 100);
 
         Auction auction = new DefaultAuction(firstBidder, secondBidder, 10);
 
-        List<Bidder> result = auction.start();
+        List<AbstractBidder> result = auction.start();
 
         firstBidder = result.get(0);
         secondBidder = result.get(1);
@@ -73,14 +73,14 @@ public class DefaultAuctionTest {
 
     @Test
     public void nullQuantityTest(){
-        Bidder firstBidder = new AverageBidder();
+        AbstractBidder firstBidder = new AverageBidder();
         firstBidder.init(0, 100);
-        Bidder secondBidder = new AverageBidder();
+        AbstractBidder secondBidder = new AverageBidder();
         secondBidder.init(0, 100);
 
         Auction auction = new DefaultAuction(firstBidder, secondBidder, 0);
 
-        List<Bidder> result = auction.start();
+        List<AbstractBidder> result = auction.start();
 
         firstBidder = result.get(0);
         secondBidder = result.get(1);

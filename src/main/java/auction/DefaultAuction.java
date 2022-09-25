@@ -1,21 +1,21 @@
 package auction;
 
+import bidders.AbstractBidder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class DefaultAuction implements Auction {
-
-    private final int PLACED_QU = 2;
     /**
      * First bidder algorithm
      */
-    private final Bidder firstBidder;
+    private final AbstractBidder firstBidder;
 
     /**
      * Second bidder algorithm
      */
-    private final Bidder secondBidder;
+    private final AbstractBidder secondBidder;
 
     /**
      * Products amount at the start
@@ -23,7 +23,7 @@ public class DefaultAuction implements Auction {
     private int quantity;
 
 
-    public DefaultAuction(Bidder firstBidder, Bidder secondBidder, int quantity) {
+    public DefaultAuction(AbstractBidder firstBidder, AbstractBidder secondBidder, int quantity) {
         Objects.requireNonNull(firstBidder);
         Objects.requireNonNull(secondBidder);
 
@@ -44,7 +44,7 @@ public class DefaultAuction implements Auction {
      * @return list with bidder's results
      */
     @Override
-    public List<Bidder> start() {
+    public List<AbstractBidder> start() {
 
         while (quantity >= 2 && quantity % 2 == 0)
         {
@@ -98,7 +98,17 @@ public class DefaultAuction implements Auction {
             System.exit(1);
         }
 
-        List<Bidder> result = new ArrayList<>();
+        //Comparing results of two bidders
+        int comparison = firstBidder.compareTo(secondBidder);
+
+        System.out.println(comparison > 0 ? "First bidder WON!\n" : comparison < 0 ? "Second bidder WON!\n" : "DRAW!\n");
+        System.out.println("First bidder won quantity: " + firstBidder.getQuantityOfWonProducts() + " QU");
+        System.out.println("First bidder has remain cash: " + firstBidder.getCash() + "\n");
+
+        System.out.println("Second bidder won quantity: " + secondBidder.getQuantityOfWonProducts()+ " QU");
+        System.out.println("Second bidder has remain cash: " + secondBidder.getCash());
+
+        List<AbstractBidder> result = new ArrayList<>();
         result.add(firstBidder);
         result.add(secondBidder);
 

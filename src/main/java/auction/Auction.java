@@ -1,5 +1,7 @@
 package auction;
 
+import bidders.AbstractBidder;
+
 import java.util.List;
 
 /**
@@ -12,5 +14,5 @@ public interface Auction {
      *
      * @return bidder <-> bidder auction result
      */
-    List<Bidder> start();
+    List<AbstractBidder> start();
 }
