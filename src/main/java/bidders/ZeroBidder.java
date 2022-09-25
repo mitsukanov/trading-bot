@@ -1,6 +1,6 @@
 package bidders;
 
-public class NullBidder extends AbstractBidder{
+public class ZeroBidder extends AbstractBidder{
     /**
      * Retrieves the next bid for the product, which may be zero.
      *
