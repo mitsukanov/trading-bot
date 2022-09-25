@@ -1,7 +1,4 @@
 package auction;
-
-import bidders.AbstractBidder;
-
 /**
  * Represents a bidder for the action.
  */
@@ -33,44 +30,4 @@ public interface Bidder {
      * the bid of the other bidder
      */
     void bids(int own, int other);
-
-    /**
-     * Get quantity of won products for future comparing.
-     *
-     * @return quantity of won products
-     */
-    int getQuantityOfWonProducts();
-
-    /**
-     * Increase quantity of won products.
-     *
-     * @param quantity
-     * quantity of won products
-     */
-    void addQuantityOfWonProducts(int quantity);
-
-    /**
-     * Get bidder's cash for future comparing.
-     *
-     * @return bidder's remaining cash
-     */
-    int getCash();
-
-    /**
-     * Reduce cash on a bid size
-     *
-     * @param bid
-     * size of bid
-     */
-    void reduceCash(int bid);
-
-    /**
-     * Comparing results of two bidders
-     *
-     * @param opponent
-     * opponent bidder
-     *
-     * @return comparison result
-     */
-    <T extends AbstractBidder> int compareTo(T opponent);
 }

@@ -48,7 +48,6 @@ public abstract class AbstractBidder implements Bidder{
      *
      * @return quantity of won products
      */
-    @Override
     public int getQuantityOfWonProducts(){
         return ownQuantity;
     }
@@ -60,7 +59,6 @@ public abstract class AbstractBidder implements Bidder{
      * @param wonQuantity
      * quantity of won products
      */
-    @Override
     public void addQuantityOfWonProducts(int wonQuantity)
     {
         ownQuantity += wonQuantity;
@@ -72,11 +70,9 @@ public abstract class AbstractBidder implements Bidder{
      *
      * @return bidder's remaining cash
      */
-    @Override
     public int getCash(){
         return cash;
     }
-
 
 
     /**
@@ -84,7 +80,7 @@ public abstract class AbstractBidder implements Bidder{
      *
      * @param bid
      * size of bid
-     */@Override
+     */
     public void reduceCash(int bid){
         cash -= bid;
     }
